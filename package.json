@@ -1,0 +1,10 @@
+{
+  "name": "workflow",
+  "version": "0.0.1",
+  "description": "A starting point for all my projects.",
+  "repository": {
+    "type": "git",
+    "url": "?.git"
+  },
+  "author": "Apoorv Mittal"
+}
