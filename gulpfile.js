@@ -15,6 +15,10 @@ gulp.task('log', function () {
 var jsSources =[
     'components/scripts/template.js'
 ];
+var htmlSources=['builds/development/*.html'];
+var jsonSources=['builds/development/*.json'];
+
+
 gulp.task('js', function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
@@ -26,6 +30,8 @@ gulp.task('js', function () {
 //can add more tasks that monitors any change and then reruns the task if there is an error
 gulp.task('watch', function () {
     gulp.watch(jsSources, ['js']);
+    gulp.watch(htmlSources,['html']);
+    gulp.watch(jsonSources,['json']);
 });
 
 gulp.task('connect', function () {
@@ -35,7 +41,16 @@ gulp.task('connect', function () {
     });
 });
 
+//looks for change in the html file
+gulp.task('html', function () {
+    gulp.src(htmlSources)
+        .pipe(connect.reload())
+});
 
-
+//looks for any change in anj JSON file
+gulp.task('json', function () {
+    gulp.src(jsonSources)
+        .pipe(connect.reload())
+});
 //in the array all the gulp tasks
-gulp.task('default',['js','watch','connect']);
+gulp.task('default',['html','js','json','watch','connect']);
