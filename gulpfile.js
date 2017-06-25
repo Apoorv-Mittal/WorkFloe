@@ -20,3 +20,6 @@ gulp.task('js', function () {
         .pipe(browserify())
         .pipe(gulp.dest('builds/development/js'))
 })
+
+//in the array all the gulp tasks
+gulp.task('default',['js'])
