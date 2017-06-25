@@ -19,7 +19,12 @@ gulp.task('js', function () {
         .pipe(concat('script.js'))
         .pipe(browserify())
         .pipe(gulp.dest('builds/development/js'))
+});
+
+//can add more tasks that monitors any change and then reruns the task if there is an error
+gulp.task('watch', function () {
+    gulp.watch(jsSources, ['js']);
 })
 
 //in the array all the gulp tasks
-gulp.task('default',['js'])
+gulp.task('default',['js','watch']);
