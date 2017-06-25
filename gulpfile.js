@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat');
     browserify = require('gulp-browserify');
+    connect = require('gulp-connect');
 
 gulp.task('log', function () {
     gutil.log('You are using Gulp');
@@ -19,12 +20,22 @@ gulp.task('js', function () {
         .pipe(concat('script.js'))
         .pipe(browserify())
         .pipe(gulp.dest('builds/development/js'))
+        .pipe(connect.reload())
 });
 
 //can add more tasks that monitors any change and then reruns the task if there is an error
 gulp.task('watch', function () {
     gulp.watch(jsSources, ['js']);
-})
+});
+
+gulp.task('connect', function () {
+    connect.server({
+        root :'build/development/',
+        livereload: true
+    });
+});
+
+
 
 //in the array all the gulp tasks
-gulp.task('default',['js','watch']);
+gulp.task('default',['js','watch','connect']);
