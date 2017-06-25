@@ -2,8 +2,9 @@
  * Created by apoorvmittal on 6/24/17.
  */
 var gulp = require('gulp'),
-     gutil = require('gulp-util'),
+    gutil = require('gulp-util'),
     concat = require('gulp-concat');
+    browserify = require('gulp-browserify');
 
 gulp.task('log', function () {
     gutil.log('You are using Gulp');
@@ -16,5 +17,6 @@ var jsSources =[
 gulp.task('js', function () {
     gulp.src(jsSources)
         .pipe(concat('script.js'))
+        .pipe(browserify())
         .pipe(gulp.dest('builds/development/js'))
 })
